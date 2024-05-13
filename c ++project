@@ -1,0 +1,71 @@
+#include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+class Room {
+public:
+    Room(int number, int capacity, bool available) : number(number), capacity(capacity), available(available) {}
+
+    int getNumber() const { return number; }
+    int getCapacity() const { return capacity; }
+    bool isAvailable() const { return available; }
+    void setAvailable(bool value) { available = value; }
+
+private:
+    int number;
+    int capacity;
+    bool available;
+};
+
+class Hotel {
+public:
+    Hotel() {
+        // Initialize rooms
+        for (int i = 1; i <= 10; ++i) {
+            rooms.push_back(Room(i, 2, true)); // 10 rooms with 2 beds each
+        }
+    }
+
+    void displayAvailableRooms() const {
+        cout << "Available Rooms:\n";
+        for (const auto& room : rooms) {
+            if (room.isAvailable()) {
+                cout << "Room " << room.getNumber() << " (Capacity: " << room.getCapacity() << ")\n";
+            }
+        }
+    }
+
+private:
+    vector<Room> rooms;
+};
+
+int main() {
+    Hotel hotel;
+
+    cout << "Welcome to Our Hotel Management System\n";
+
+    while (true) {
+        cout << "\nMenu:\n";
+        cout << "1. Display Available Rooms\n";
+        cout << "2. Exit\n";
+        cout << "Enter your choice: ";
+
+        int choice;
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                hotel.displayAvailableRooms();
+                break;
+            case 2:
+                cout << "Exiting...\n";
+                return 0;
+            default:
+                cout << "Invalid choice. Please try again.\n";
+        }
+    }
+
+    return 0;
+}
